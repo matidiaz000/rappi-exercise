@@ -130,7 +130,7 @@ El uso de herramientas de IA (Claude, ChatGPT, Copilot, etc.) es **esperado y va
 
 ## Entregables obligatorios
 
-1. **Repositorio** con el código fuente y README claro.
+1. **Repositorio** con el código fuente y README claro. Invitá a **`nicolasmiddi`** como colaborador del repositorio que crees para la entrega.
 
 2. **DECISIONS.md** con al menos 3 trade-offs justificados. Tiene que incluir, como mínimo, cómo resolviste **los tres puntos ambiguos** de la sección anterior. Otros ejemplos de qué más puede ir ahí:
    - *"Elegí Zustand/Pinia/Signals en lugar de X porque..."*
