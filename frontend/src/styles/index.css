@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Instrument Sans Variable", "Instrument Sans", ui-sans-serif,
+    system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Bricolage Grotesque",
+    ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: #f1f3e9;
+  --color-paper-deep: #e5e9da;
+  --color-surface: #fbfcf7;
+  --color-ink: #10201b;
+  --color-ink-soft: #45564e;
+  --color-ink-muted: #708077;
+  --color-line: #d6dccb;
+  --color-line-strong: #bcc6ae;
+  --color-bill: #0d7256;
+  --color-bill-deep: #0a5641;
+  --color-bill-soft: #d9ebe0;
+  --color-pending: #a97612;
+  --color-pending-soft: #f3e6c6;
+  --color-danger: #ad3a2d;
+  --color-danger-soft: #f6ddd7;
+  --color-sidebar: #0c201a;
+  --color-sidebar-soft: #173128;
+  --color-sidebar-line: #26443a;
+
+  --radius-card: 1.25rem;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  ::selection {
+    background-color: var(--color-bill);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-bill);
+    outline-offset: 2px;
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+
+  dialog::backdrop {
+    background-color: rgb(12 32 26 / 0.58);
+    backdrop-filter: blur(2px);
+  }
+}
+
+@utility ledger-paper {
+  background-color: var(--color-paper);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 31px,
+    rgb(16 32 27 / 0.045) 31px,
+    rgb(16 32 27 / 0.045) 32px
+  );
+}
+
+@utility guilloche {
+  background-image: repeating-linear-gradient(
+      115deg,
+      transparent 0 11px,
+      rgb(255 255 255 / 0.045) 11px 12px
+    ),
+    repeating-linear-gradient(
+      -115deg,
+      transparent 0 17px,
+      rgb(255 255 255 / 0.035) 17px 18px
+    );
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* El único movimiento orquestado: el sello cuando la transferencia se liquida. */
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.35) rotate(-9deg);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.97) rotate(1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+@keyframes pending-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+}
+
+.animate-stamp {
+  animation: stamp-in 480ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.animate-sweep {
+  animation: sweep 1.5s ease-in-out infinite;
+}
+
+.animate-pending-pulse {
+  animation: pending-pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
