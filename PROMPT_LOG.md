@@ -8,7 +8,16 @@ Es importante que una vez el usuario se logue se guarden los datos del mismo en 
 
 Las secciones de la app van a ser las siguientes:
 
-- La sección principal llamada "billetera personal" donde se va a poder ver el saldo del usuario (saldo en pesos y el dólares), ultimas transacciones
-- "Historial" donde el usuario va a poder ver el historial de sus gastos
-- "Cuenta" donde el usuario pueda ver sus datos personales (los que estan guardados en el localstorage)
-- "Transferir" donde el usuario va poder ver todos los usuarios asociados y transferirles plata una vez lo seleccione
+La sección principal llamada "billetera personal" donde se va a poder ver el saldo del usuario (saldo en pesos y el dólares) y tambien ultimas transacciones
+
+"Historial" donde el usuario va a poder ver el historial de sus gastos
+
+"Cuenta" donde el usuario pueda ver sus datos personales (los que estan guardados en el localstorage)
+
+"Transferir" donde el usuario va poder ver todos los usuarios asociados y transferirles plata una vez lo seleccione y el flujo deberia ser el siguiente:
+- Elegís un contacto y una cuenta de origen de la misma moneda.
+- El monto se valida en el cliente: formato, mínimo, máximo y saldo disponible.
+- Un modal resume destinatario, cuenta, monto y saldo resultante.
+- La API crea la transferencia en estado pending.
+- El comprobante consulta el estado cada segundo hasta que pasa a completed o failed.
+- Al liquidarse se invalidan cuentas y transacciones para refrescar saldos e historial.
